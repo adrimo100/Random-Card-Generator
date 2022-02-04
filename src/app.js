@@ -65,13 +65,19 @@ const renderPalo = (nPalo, card) => {
 };
 
 const setColor = (nPalo, card) => {
-  if (nPalo == 1 || nPalo == 2) {
-    let estilos = card.querySelectorAll(".style");
+  let estilos = card.querySelectorAll(".style");
 
+  if (nPalo == 1 || nPalo == 2) {
     console.log(estilos);
 
     for (let estilo of estilos) estilo.style.color = "red";
+  } else {
+    console.log(estilos);
+
+    for (let estilo of estilos) estilo.style.color = "black";
   }
+
+  console.log(nPalo);
 };
 
 const getRandonNumber = array => {

@@ -7,7 +7,7 @@ import "./assets/img/4geeks.ico";
 
 window.onload = function() {
   //write your code here
-  renderCard();
+  renderHand();
 };
 
 let numbers = [
@@ -35,31 +35,38 @@ let palos = [
   </svg>`
 ];
 
-const renderCard = () => {
+const renderHand = () => {
+  //Seleccionamos todas las cartas
+
+  let cards = document.querySelectorAll(".card");
+
   //Selecionamos los elementos al azar
-  let nPalo = getRandonNumber(palos);
 
-  let nNumber = getRandonNumber(numbers);
+  for (let card of cards) {
+    let nPalo = getRandonNumber(palos);
 
-  //Llamamos a los métodos necesarias
-  renderNumber(nNumber);
-  renderPalo(nPalo);
-  setColor(nPalo);
+    let nNumber = getRandonNumber(numbers);
+
+    //Llamamos a los métodos necesarias
+    renderNumber(nNumber, card);
+    renderPalo(nPalo, card);
+    setColor(nPalo, card);
+  }
 };
 
-const renderNumber = nNumber => {
-  document.querySelector(".number").innerHTML = numbers[nNumber];
+const renderNumber = (nNumber, card) => {
+  card.querySelector(".number").innerHTML = numbers[nNumber];
 };
 
-const renderPalo = nPalo => {
-  let d_palos = document.querySelectorAll(".palo");
+const renderPalo = (nPalo, card) => {
+  let d_palos = card.querySelectorAll(".palo");
 
   for (let palo of d_palos) palo.innerHTML = palos[nPalo];
 };
 
-const setColor = nPalo => {
+const setColor = (nPalo, card) => {
   if (nPalo == 1 || nPalo == 2) {
-    let estilos = document.querySelectorAll(".style");
+    let estilos = card.querySelectorAll(".style");
 
     console.log(estilos);
 
@@ -70,3 +77,5 @@ const setColor = nPalo => {
 const getRandonNumber = array => {
   return Math.floor(Math.random() * array.length);
 };
+
+document.querySelector(".btn").addEventListener("click", renderHand);
